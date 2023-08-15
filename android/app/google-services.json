@@ -1,0 +1,62 @@
+{
+  "project_info": {
+    "project_number": "13591789449",
+    "project_id": "fimarshop-e4f4f",
+    "storage_bucket": "fimarshop-e4f4f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:13591789449:android:0328e39757e20efaee6b58",
+        "android_client_info": {
+          "package_name": "com.blueray.fimarshop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "13591789449-d975cv3575vbnj1eadmauaf5tqgukr1t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.blueray.fimarshop",
+            "certificate_hash": "820676ab3cfd865574cd824cb4e16cfe5d6160a9"
+          }
+        },
+        {
+          "client_id": "13591789449-drfr2fad8c90o2l73thbr0ubphcupdsi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.blueray.fimarshop",
+            "certificate_hash": "9a3644f7371594fcfac8594b99c3b28f3b0986ba"
+          }
+        },
+        {
+          "client_id": "13591789449-hj5l9g6aimn6d4557253f34i67kmbpub.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5za_ORoEiYjLGLNMq8I9a4tIps_0Vw2M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "13591789449-hj5l9g6aimn6d4557253f34i67kmbpub.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "13591789449-lslcmjoqrimrq4eaeq7odnd0ei8jdqn9.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.blueray.fimarshop"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

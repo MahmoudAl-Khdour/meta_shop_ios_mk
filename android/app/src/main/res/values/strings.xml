@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MetaShop</string>
+    <string name="facebook_app_id">640843921413888</string>
+    <string name="fb_login_protocol_scheme">fb640843921413888</string>
+    <string name="facebook_client_token">a25fc93e8e8ea682315ba0dca6fa50a1</string>
+</resources>
+
