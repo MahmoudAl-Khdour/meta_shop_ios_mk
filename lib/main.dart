@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -12,9 +11,9 @@ import 'package:meta_shop/services/helper/cache_utils.dart';
 import 'package:meta_shop/services/repository/http_repository.dart';
 import 'package:meta_shop/services/repository/http_repository_impl.dart';
 import 'package:meta_shop/view/components/component/baseWidget/base_widget.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:meta_shop/view/components/constants/constant_data/constant_data.dart';
 import 'package:meta_shop/view/pages/login/login.dart';
-import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 import 'model/flag_model.dart';
 
