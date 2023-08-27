@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:meta_shop/model/flag_model.dart';
 import 'package:meta_shop/services/helper/cache_utils.dart';
 import 'package:meta_shop/services/repository/http_repository.dart';
+import 'package:meta_shop/view/components/constants/constant_data/constant_data.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 import '../../../components/component/baseWidget/base_widget.dart';
@@ -26,6 +28,33 @@ class SignupController extends GetxController {
   RxInt social = 0.obs;
 
   RxBool isHuawei = false.obs;
+  Rx<bool?> flagUser = Rx<bool?>(null);
+
+  void initialization() async {
+    try {
+      Response? flagResponse;
+      // HttpRepository httpRepository = HttpRepositoryImpl();
+      // CacheUtils cacheUtils = CacheUtils(GetStorage());
+      FlagModel? flagModel;
+      flagResponse = await httpRepository.flagApi();
+      flagModel = FlagModel.fromJson(flagResponse!.body);
+      bool? flag = flagModel.status;
+      print('\n\n\n\n mk flag: $flag \n\n\n\n\n\n');
+
+      if (flag == true) {
+        await cacheUtils.saveFlag(flag: true);
+        MySingleton.instance.setFlag = true;
+        flagUser.value = true;
+        // Get.offAll(() => const BaseWidget());
+      } else if (flag == false) {
+        MySingleton.instance.setFlag = false;
+        await cacheUtils.saveFlag(flag: false);
+        flagUser.value = false;
+      }
+    } catch (e) {
+      flagUser.value = false;
+    }
+  }
 
   hidePassFun() {
     if (hidePass.value) {
@@ -116,6 +145,8 @@ class SignupController extends GetxController {
   @override
   Future<void> onInit() async {
     isHuawei.value = cacheUtils.getPhoneType() ?? false;
+    initialization();
+
     super.onInit();
   }
 }

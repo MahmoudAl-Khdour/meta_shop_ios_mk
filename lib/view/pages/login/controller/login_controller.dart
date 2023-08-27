@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:meta_shop/model/flag_model.dart';
 import 'package:meta_shop/services/helper/cache_utils.dart';
 import 'package:meta_shop/services/repository/http_repository.dart';
+import 'package:meta_shop/view/components/constants/constant_data/constant_data.dart';
 import 'package:meta_shop/view/components/constants/style/colors/color.dart';
 import 'package:meta_shop/view/pages/login/model/login_model.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
@@ -19,6 +20,8 @@ class LoginController extends GetxController {
   final formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+
+  Rx<bool?> flagUser = Rx<bool?>(null);
 
   RxBool isLoggedIn = false.obs;
 
@@ -143,6 +146,32 @@ class LoginController extends GetxController {
     }
   }
 
+  void initialization() async {
+    try {
+      Response? flagResponse;
+      // HttpRepository httpRepository = HttpRepositoryImpl();
+      // CacheUtils cacheUtils = CacheUtils(GetStorage());
+      FlagModel? flagModel;
+      flagResponse = await _httpRepository.flagApi();
+      flagModel = FlagModel.fromJson(flagResponse!.body);
+      bool? flag = flagModel.status;
+      print('\n\n\n\n mk flag: $flag \n\n\n\n\n\n');
+
+      if (flag == true) {
+        await cacheUtils.saveFlag(flag: true);
+        MySingleton.instance.setFlag = true;
+        flagUser.value = true;
+        // Get.offAll(() => const BaseWidget());
+      } else if (flag == false) {
+        MySingleton.instance.setFlag = false;
+        await cacheUtils.saveFlag(flag: false);
+        flagUser.value = false;
+      }
+    } catch (e) {
+      flagUser.value = false;
+    }
+  }
+
   userLoginWithSocial({required String email}) async {
     var status = await OneSignal.shared.getDeviceState();
     if (status == null || status.userId == null) {
@@ -216,7 +245,7 @@ class LoginController extends GetxController {
   @override
   Future<void> onInit() async {
     isHuawei.value = cacheUtils.getPhoneType() ?? false;
-
+    initialization();
     super.onInit();
   }
 }
